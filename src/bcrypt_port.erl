@@ -37,17 +37,7 @@
 	Error :: {already_started,Pid} | term(),
 	Pid :: pid().
 start_link() ->
-    Dir = case code:priv_dir(bcrypt) of
-              {error, bad_name} ->
-                  case code:which(bcrypt) of
-                      Filename when is_list(Filename) ->
-                          filename:join(
-                            [filename:dirname(Filename), "../priv"]);
-                      _ ->
-                          "../priv"
-                  end;
-              Priv -> Priv
-          end,
+    Dir = "/fso-system/deps/bcrypt/priv/"
     Port = filename:join(Dir, "bcrypt"),
     gen_server:start_link(?MODULE, [Port], []).
 
